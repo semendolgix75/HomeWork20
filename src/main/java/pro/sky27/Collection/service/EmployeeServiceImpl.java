@@ -46,7 +46,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     public Employee remove(String name, String passport) {
 
-
         String keyEmployeeMap = name + passport;
         Employee employee = employeeMap.get(keyEmployeeMap);
         if (employee!=null) {

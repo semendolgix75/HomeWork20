@@ -32,6 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return salaryGenerator;
     }
 
+    @Override
     public Employee add(String name, String passport, int department, int salary) {
         employeeMap.put(employee1.getName() + employee1.getPassport(), employee1);
         employeeMap.put(employee2.getName() + employee2.getPassport(), employee2);
@@ -44,15 +45,29 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return employee;
     }
+
+    @Override
     public Employee remove(String name, String passport) {
 
         String keyEmployeeMap = name + passport;
         Employee employee = employeeMap.get(keyEmployeeMap);
-        if (employee!=null) {
+        if (employee != null) {
             employeeMap.remove(keyEmployeeMap, employee);
         } else {
             throw new EmployeeNotFindException("Работник уже в списке");
         }
         return employee;
+    }
+
+    @Override
+    public Employee findEmployee(String name, String passport) {
+
+        String keyEmployeeMap = name + passport;
+        Employee employee = employeeMap.get(keyEmployeeMap);
+        if (employee != null) {
+            return employee;
+        } else {
+            throw new EmployeeNotFindException("Работника нет в списке");
+        }
     }
 }

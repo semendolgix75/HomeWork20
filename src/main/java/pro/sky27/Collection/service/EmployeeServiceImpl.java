@@ -5,6 +5,8 @@ import pro.sky27.Collection.domain.Employee;
 import pro.sky27.Collection.exception.EmployeeAlReadyAddedException;
 import pro.sky27.Collection.exception.EmployeeNotFindException;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -33,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String name, String passport, int department, int salary) {
+    public Employee addEmployee(String name, String passport, int department, int salary) {
         employeeMap.put(employee1.getName() + employee1.getPassport(), employee1);
         employeeMap.put(employee2.getName() + employee2.getPassport(), employee2);
         Employee employee = new Employee(name, passport, department, salary);
@@ -47,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee remove(String name, String passport) {
+    public Employee removeEmployee(String name, String passport) {
 
         String keyEmployeeMap = name + passport;
         Employee employee = employeeMap.get(keyEmployeeMap);
@@ -69,5 +71,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             throw new EmployeeNotFindException("Работника нет в списке");
         }
+    }
+
+    @Override
+    public Map<String, Employee> outputEmployeeInfo() {
+        return Collections.unmodifiableMap(employeeMap);
     }
 }

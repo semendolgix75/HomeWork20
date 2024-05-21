@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky27.Collection.domain.Employee;
 import pro.sky27.Collection.service.EmployeeService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -21,7 +23,7 @@ public class EmployeeController {
                                 @RequestParam("passport") String passport,
                                 @RequestParam("department") Integer department,
                                 @RequestParam("salary") Integer salary) {
-        return employeeService.add(name, passport, department, salary);
+        return employeeService.addEmployee(name, passport, department, salary);
 
     }
     @GetMapping("/remove")
@@ -29,7 +31,7 @@ public class EmployeeController {
                             @RequestParam("passport") String passport,
                             @RequestParam("department") Integer department,
                             @RequestParam("salary") Integer salary) {
-        return employeeService.remove(name, passport);
+        return employeeService.removeEmployee(name, passport);
 
     }
     @GetMapping("/find")
@@ -39,6 +41,10 @@ public class EmployeeController {
                                    @RequestParam("salary") Integer salary) {
         return employeeService.findEmployee(name, passport);
 
+    }
+    @GetMapping
+    public Map<String, Employee> outputEmployeeInfo() {
+        return employeeService.outputEmployeeInfo();
     }
 }
 
